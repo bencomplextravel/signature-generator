@@ -1,10 +1,9 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { INITIAL_SIGNATURE_DATA } from "@/lib/brands";
+import { BRANDS, INITIAL_SIGNATURE_DATA } from "@/lib/brands";
 import type { SignatureData, UpdateFn } from "@/lib/types";
 import SignatureForm from "@/components/SignatureForm";
-import PreviewFrame from "@/components/PreviewFrame";
 import SignatureTemplate from "@/components/SignatureTemplate";
 import ExportButton from "@/components/ExportButton";
 import InstructionPanel from "@/components/InstructionPanel";
@@ -18,16 +17,17 @@ export default function Home() {
   return (
     <main className="min-h-screen lg:grid lg:grid-cols-[440px_1fr]">
       {/* Left: form */}
-      <aside className="border-r bg-white p-6 lg:h-screen lg:overflow-y-auto">
+      <aside className="border-r border-gray-200 bg-white p-6 lg:h-screen lg:overflow-y-auto">
         <h1 className="mb-6 text-2xl font-semibold">Create your email signature</h1>
         <SignatureForm data={data} onChange={update} />
       </aside>
 
-      {/* Right: preview + actions */}
+      {/* Right: signature preview + actions */}
       <section className="flex flex-col items-center gap-6 p-6 lg:h-screen lg:overflow-y-auto">
-        <PreviewFrame>
+        {/* Same width as the signature, so it sits centred above the buttons */}
+        <div className="w-full" style={{ maxWidth: BRANDS[data.brandId].layout.container.maxWidth }}>
           <SignatureTemplate ref={signatureRef} data={data} />
-        </PreviewFrame>
+        </div>
         <ExportButton targetRef={signatureRef} data={data} />
         <InstructionPanel />
       </section>

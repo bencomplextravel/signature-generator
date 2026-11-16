@@ -39,3 +39,35 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ---- secrets & credentials (never push) ----
+# .env* above covers .env, .env.local, .env.production…; the example file is safe to share
+!.env.example
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.jks
+id_rsa*
+id_ed25519*
+secrets/
+credentials*.json
+service-account*.json
+*.secret
+*.secrets
+
+# ---- local app data (admin brand store, never overwrite from git) ----
+/data/
+
+# ---- logs ----
+*.log
+logs/
+
+# ---- editor / OS files ----
+.vscode/*
+!.vscode/extensions.json
+.idea/
+Thumbs.db
+desktop.ini
+*.swp
